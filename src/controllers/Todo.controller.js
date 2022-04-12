@@ -1,5 +1,6 @@
 const todo = require("../model/todos.js");
 const {getAllTodos,getTodoByID,createTodo,updateTodo,removeTodo} = require('../services/todos.service.js');
+const ValidationUtil = require('../core/utilities/ValidationUtil.js');
 
 module.exports = class Todo{
 
@@ -10,6 +11,9 @@ module.exports = class Todo{
 
     static async getTodoByID(req,res){
         const {id} = req.params;
+
+        ValidationUtil.isNullOrUndefined(id,"ID");
+
         const todoByID = await getTodoByID(id);
         res.json(todoByID);
     }
@@ -17,6 +21,9 @@ module.exports = class Todo{
     static async createTodo(req,res){
         const {name} = req.body;
         
+        ValidationUtil.isNullOrUndefined(name, "Name");
+        ValidationUtil.isStringEmpty(name, "Name");
+
         const newTodo = await createTodo(name);
         res.status(200).location(`/todos/${newTodo._id}`);
         res.json({status:"Success"});
@@ -24,7 +31,22 @@ module.exports = class Todo{
 
     static async updateTodo(req,res){
         const {id} = req.params;
-        await updateTodo(id,req.body);
+        const {name, status} = req.body;
+        const keys = Object.keys(req.body);
+
+        ValidationUtil.isNullOrUndefined(id, "ID");
+        
+        if(keys.includes("name")){
+            ValidationUtil.isNullOrUndefined(name, "Name");
+            ValidationUtil.isStringEmpty(name, "Name");
+        }
+
+        if(keys.includes("status")){
+            ValidationUtil.isNullOrUndefined(status, "Status");
+            ValidationUtil.isStringEmpty(status, "Status");
+        }
+
+        await updateTodo(id,);
 
         res.json({status: "Success"});
         
@@ -32,6 +54,9 @@ module.exports = class Todo{
 
     static async removeTodo(req,res){
         const {id} = req.params;
+
+        ValidationUtil.isNullOrUndefined(id,"ID");
+
         await removeTodo(id);
         res.json({status: "Success"});
         
