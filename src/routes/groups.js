@@ -1,0 +1,15 @@
+const express = require('express');
+
+const Groups = require('../controllers/Group.controller.js');
+
+const router = express.Router();
+
+router.get("/",Groups.getAllGroups);
+router.get("/:id",Groups.getGroupsByID);
+router.post("/",Groups.createGroup);
+router.put("/:id",Groups.updateGroup);
+router.delete("/:id",Groups.removeGroups);
+
+router.post("/:id/lists",Groups.createList);
+
+module.exports = router;
