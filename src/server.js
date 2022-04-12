@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 require('dotenv').config();
+require('express-async-errors');
 
 const app = require("./app.js");
 

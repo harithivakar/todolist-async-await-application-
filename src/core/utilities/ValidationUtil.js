@@ -1,13 +1,15 @@
+const ErrorUtil = require("./ErrorUtil.js");
+
 module.exports = class ValidationUtil {
     static isNullOrUndefined(value, key){
         if(value === null || value === undefined || value === "undefined" || value === "null"){
-            throw new Error(`${key} is null or undefined`);
+            ErrorUtil.throwValidationError(`${key} is null or undefined`,"VALIDATION_ERR");
         }
     }
 
     static isStringEmpty(value, key){
         if(value === ""){
-            throw new Error(`${key} is empty`);
+            ErrorUtil.throwValidationError(`${key} is empty`,"VALIDATION_ERR");
         }
     }
 
