@@ -13,7 +13,6 @@ app.use(express.json());
 app.use(router);
 
 //Custom error handler middleware
-
 app.use((err, req, res, next) => {
     const errorCode = err.code || 500;
     const errId = err.errId || "UNKNOWN";

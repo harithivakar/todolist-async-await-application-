@@ -46,7 +46,7 @@ module.exports = class Todo{
             ValidationUtil.isStringEmpty(status, "Status");
         }
 
-        await updateTodo(id,);
+        await updateTodo(id,req.body);
 
         res.json({status: "Success"});
         
