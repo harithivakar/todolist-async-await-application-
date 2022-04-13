@@ -46,7 +46,7 @@ exports.updateList = async (id, data) => {
         updatedList.listType = listType; 
     }
 
-    List.findByIdAndUpdate(id, {$set:updatedList});
+   await List.findByIdAndUpdate(id, {$set:updatedList});
     
     return updatedList;
 }

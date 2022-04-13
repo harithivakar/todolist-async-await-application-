@@ -48,7 +48,7 @@ module.exports = class List {
             ValidationUtil.isStringEmpty(listType, "List Type");
         }
 
-        await updateList(id, req.params);
+        await updateList(id, req.body);
         res.json({status: "Success"});
     }
 
